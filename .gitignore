@@ -1,0 +1,12 @@
+# Original delivery archive + scratch extraction (regenerable, not tracked)
+Email template design.zip
+extracted/
+.thumbnail
+
+# Build helper
+.build-standalone.mjs
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
