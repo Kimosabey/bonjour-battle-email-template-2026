@@ -1,0 +1,10 @@
+# Static site — no build step. Netlify publishes the repo root as-is.
+[build]
+  command = ""
+  publish = "."
+
+# Long-cache the immutable email assets; keep the gallery itself fresh.
+[[headers]]
+  for = "/emails/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
