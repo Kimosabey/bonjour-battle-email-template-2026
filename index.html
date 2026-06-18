@@ -18,7 +18,7 @@
     --muted: #A89FB5;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; max-width: 100%; overflow-x: hidden; }
   body {
     background: var(--cream);
     font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -53,9 +53,9 @@
 
   .grid {
     display: grid; gap: 40px; margin: 48px 0 0;
-    grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+    /* min(640px,100%) stops the track from ever exceeding the viewport → no page-level horizontal scroll */
+    grid-template-columns: repeat(auto-fill, minmax(min(640px, 100%), 1fr));
   }
-  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
 
   .card {
     background: #fff; border-radius: 16px; overflow: hidden;
@@ -73,8 +73,8 @@
   .card-head h2 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -.3px; }
   .card-head p { margin: 3px 0 0; font-size: 13px; font-weight: 500; color: var(--ink); }
 
-  .previews { display: flex; gap: 28px; align-items: flex-start; padding: 26px 24px 28px; overflow-x: auto; }
-  .device { flex: none; }
+  /* Stacked previews — no side-by-side row, so nothing can overflow horizontally */
+  .previews { display: flex; flex-direction: column; gap: 26px; padding: 26px 24px 28px; }
   .device-label {
     margin: 0 0 10px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
     text-transform: uppercase; color: var(--muted);
@@ -83,12 +83,12 @@
     border: 1px solid #ECE4D9; border-radius: 12px; overflow: hidden;
     background: var(--cream); box-shadow: 0 6px 18px rgba(26,11,46,.06);
   }
-  .device.desktop .frame { width: 600px; }
-  .device.mobile .frame { width: 360px; }
+  .frame.desktop { width: 100%; }                 /* fluid → never wider than the card */
+  .frame.mobile  { width: min(360px, 100%); margin: 0 auto; }  /* fixed phone width, but clamps on tiny screens */
   iframe { display: block; width: 100%; border: 0; }
 
   .open-link {
-    display: inline-block; margin: 14px 24px 24px; font-size: 13px; font-weight: 700;
+    display: inline-block; margin: 6px 24px 24px; font-size: 13px; font-weight: 700;
     color: var(--purple); text-decoration: none;
   }
   .open-link:hover { text-decoration: underline; }
@@ -103,7 +103,7 @@
   <header class="intro">
     <p class="eyebrow">Lingotran · Email System</p>
     <h1>Bonjour Battle — registration email</h1>
-    <p class="lede">Five premium / editorial directions for the Season&nbsp;1 registration email, each shown at desktop (600px) and mobile (360px). Type and layout adapt fluidly. <strong>Pick one</strong> and we'll ship the production-ready, email-client-tested version.</p>
+    <p class="lede">Five premium / editorial directions for the Season&nbsp;1 registration email, each shown at desktop and mobile (360px). Type and layout adapt fluidly. <strong>Pick one</strong> and we'll ship the production-ready, email-client-tested version.</p>
   </header>
 
   <div class="legend">
@@ -131,13 +131,36 @@
 
   const grid = document.getElementById("grid");
 
-  // Same-origin iframes: resize each to its content height once loaded.
+  // Size a same-origin iframe to its exact content height so it never shows an
+  // internal scrollbar (and never clips, since we keep re-measuring).
   function fit(iframe) {
     try {
       const doc = iframe.contentDocument || iframe.contentWindow.document;
-      const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+      const h = Math.max(
+        doc.documentElement ? doc.documentElement.scrollHeight : 0,
+        doc.body ? doc.body.scrollHeight : 0
+      );
       if (h) iframe.style.height = h + "px";
-    } catch (e) { iframe.style.height = "1500px"; }
+    } catch (e) {
+      iframe.style.height = "1700px"; // cross-origin fallback (shouldn't happen here)
+    }
+  }
+
+  function wire(iframe) {
+    const onLoad = () => {
+      fit(iframe);
+      try {
+        const win = iframe.contentWindow, doc = iframe.contentDocument;
+        // Re-fit on any reflow inside the email (fonts swapping, logo image loading…)
+        if (win && win.ResizeObserver && doc && doc.documentElement) {
+          new win.ResizeObserver(() => fit(iframe)).observe(doc.documentElement);
+        }
+        if (doc && doc.fonts && doc.fonts.ready) doc.fonts.ready.then(() => fit(iframe));
+      } catch (e) { /* ignore */ }
+      [150, 400, 900, 1600].forEach((t) => setTimeout(() => fit(iframe), t));
+    };
+    iframe.addEventListener("load", onLoad);
+    if (iframe.contentDocument && iframe.contentDocument.readyState === "complete") onLoad();
   }
 
   for (const d of DIRECTIONS) {
@@ -152,24 +175,27 @@
         </div>
       </div>
       <div class="previews">
-        <div class="device desktop">
-          <p class="device-label">Desktop · 600</p>
-          <div class="frame"><iframe loading="lazy" title="${d.name} desktop" src="${d.file}"></iframe></div>
+        <div>
+          <p class="device-label">Desktop</p>
+          <div class="frame desktop"><iframe scrolling="no" loading="lazy" title="${d.name} desktop" src="${d.file}"></iframe></div>
         </div>
-        <div class="device mobile">
+        <div>
           <p class="device-label">Mobile · 360</p>
-          <div class="frame"><iframe loading="lazy" title="${d.name} mobile" src="${d.file}"></iframe></div>
+          <div class="frame mobile"><iframe scrolling="no" loading="lazy" title="${d.name} mobile" src="${d.file}"></iframe></div>
         </div>
       </div>
       <a class="open-link" href="${d.file}" target="_blank" rel="noopener">Open ${d.id} full screen ↗</a>
     `;
     grid.appendChild(card);
-    card.querySelectorAll("iframe").forEach((f) => {
-      f.addEventListener("load", () => fit(f));
-      // Re-fit after web fonts settle.
-      setTimeout(() => fit(f), 600);
-    });
+    card.querySelectorAll("iframe").forEach(wire);
   }
+
+  // Heights change when the column width changes (desktop frame is fluid).
+  let rt;
+  window.addEventListener("resize", () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => document.querySelectorAll("iframe").forEach(fit), 120);
+  });
 </script>
 </body>
 </html>
