@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bonjour Battle — registration email · pick a direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #1A0B2E;
+    --purple: #41009A;
+    --violet: #7C4DFF;
+    --coral: #FF6B4A;
+    --cream: #E7E4DF;
+    --ink: #5A5368;
+    --muted: #A89FB5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--plum);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 56px 32px 96px; }
+
+  header.intro { margin: 0 0 12px; }
+  .eyebrow {
+    margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--coral);
+  }
+  h1 {
+    margin: 8px 0 6px; font-size: clamp(26px, 4vw, 34px); font-weight: 800;
+    letter-spacing: -0.6px; line-height: 1.08;
+  }
+  .lede { margin: 0; max-width: 720px; font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--ink); }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center;
+    margin: 26px 0 0; padding: 16px 20px; background: #fff; border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(26,11,46,.06); font-size: 13.5px; font-weight: 600; color: var(--ink);
+  }
+  .legend strong { color: var(--plum); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px;
+    border-radius: 999px; background: #F0E6FF; color: var(--purple);
+    font-size: 12px; font-weight: 800; letter-spacing: .3px;
+  }
+
+  .grid {
+    display: grid; gap: 40px; margin: 48px 0 0;
+    grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+  }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 18px 40px rgba(26,11,46,.10);
+  }
+  .card-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 20px 24px; border-bottom: 1px solid #F0EBF7;
+  }
+  .badge {
+    flex: none; width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--purple); color: #fff; font-size: 17px; font-weight: 800;
+  }
+  .card-head h2 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -.3px; }
+  .card-head p { margin: 3px 0 0; font-size: 13px; font-weight: 500; color: var(--ink); }
+
+  .previews { display: flex; gap: 28px; align-items: flex-start; padding: 26px 24px 28px; overflow-x: auto; }
+  .device { flex: none; }
+  .device-label {
+    margin: 0 0 10px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .frame {
+    border: 1px solid #ECE4D9; border-radius: 12px; overflow: hidden;
+    background: var(--cream); box-shadow: 0 6px 18px rgba(26,11,46,.06);
+  }
+  .device.desktop .frame { width: 600px; }
+  .device.mobile .frame { width: 360px; }
+  iframe { display: block; width: 100%; border: 0; }
+
+  .open-link {
+    display: inline-block; margin: 14px 24px 24px; font-size: 13px; font-weight: 700;
+    color: var(--purple); text-decoration: none;
+  }
+  .open-link:hover { text-decoration: underline; }
+
+  footer.foot { margin: 64px 0 0; padding: 24px 0 0; border-top: 1px solid #D9D2C8; font-size: 13px; color: var(--ink); }
+  footer.foot a { color: var(--purple); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="intro">
+    <p class="eyebrow">Lingotran · Email System</p>
+    <h1>Bonjour Battle — registration email</h1>
+    <p class="lede">Five premium / editorial directions for the Season&nbsp;1 registration email, each shown at desktop (600px) and mobile (360px). Type and layout adapt fluidly. <strong>Pick one</strong> and we'll ship the production-ready, email-client-tested version.</p>
+  </header>
+
+  <div class="legend">
+    <span class="pill">Pure HTML</span>
+    <span>No JavaScript, no external runtime — these render in any browser and email client.</span>
+    <span>·</span>
+    <span>Reply with the letter (<strong>A–E</strong>) you want to ship.</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer class="foot">
+    Lingotran Private Limited · <a href="mailto:info@lingotran.com">info@lingotran.com</a> · Source files in <code>/emails</code> (sendable) and <code>/source</code> (design-tool originals).
+  </footer>
+</div>
+
+<script>
+  const DIRECTIONS = [
+    { id: "A", file: "emails/a-editorial-light.html",  name: "Editorial Light",  desc: "Clean white layout with a coral top rule — calm and content-first." },
+    { id: "B", file: "emails/b-gradient-premium.html", name: "Gradient Premium", desc: "Bold purple gradient hero — the most premium, branded feel." },
+    { id: "C", file: "emails/c-minimal-centered.html", name: "Minimal Centered", desc: "Centered, cream, typographic — minimal with a big prize stat." },
+    { id: "D", file: "emails/d-dark-editorial.html",   name: "Dark Editorial",   desc: "Dark plum theme — high-contrast and dramatic." },
+    { id: "E", file: "emails/e-event-ticket.html",     name: "Event Ticket",     desc: "Ticket-stub motif with perforation and a 3-column detail strip." },
+  ];
+
+  const grid = document.getElementById("grid");
+
+  // Same-origin iframes: resize each to its content height once loaded.
+  function fit(iframe) {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+      if (h) iframe.style.height = h + "px";
+    } catch (e) { iframe.style.height = "1500px"; }
+  }
+
+  for (const d of DIRECTIONS) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-head">
+        <span class="badge">${d.id}</span>
+        <div>
+          <h2>${d.name}</h2>
+          <p>${d.desc}</p>
+        </div>
+      </div>
+      <div class="previews">
+        <div class="device desktop">
+          <p class="device-label">Desktop · 600</p>
+          <div class="frame"><iframe loading="lazy" title="${d.name} desktop" src="${d.file}"></iframe></div>
+        </div>
+        <div class="device mobile">
+          <p class="device-label">Mobile · 360</p>
+          <div class="frame"><iframe loading="lazy" title="${d.name} mobile" src="${d.file}"></iframe></div>
+        </div>
+      </div>
+      <a class="open-link" href="${d.file}" target="_blank" rel="noopener">Open ${d.id} full screen ↗</a>
+    `;
+    grid.appendChild(card);
+    card.querySelectorAll("iframe").forEach((f) => {
+      f.addEventListener("load", () => fit(f));
+      // Re-fit after web fonts settle.
+      setTimeout(() => fit(f), 600);
+    });
+  }
+</script>
+</body>
+</html>
