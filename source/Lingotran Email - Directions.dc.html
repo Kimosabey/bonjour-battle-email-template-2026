@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <style>
+    html,body{margin:0;padding:0;}
+    *{box-sizing:border-box;}
+  </style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:56px 48px 80px;background:#E7E4DF;font-family:'Nunito','Helvetica Neue',Helvetica,Arial,sans-serif;">
+
+  <div style="margin:0 0 44px;">
+    <p style="margin:0;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#FF6B4A;">Lingotran · Email System</p>
+    <h1 style="margin:6px 0 4px;font-size:30px;font-weight:800;letter-spacing:-0.6px;color:#1A0B2E;">Bonjour Battle — registration email</h1>
+    <p style="margin:0;font-size:15px;font-weight:500;color:#5A5368;">Five premium / editorial directions, each shown at desktop (600px) and mobile (375px). Type and layout adapt fluidly. Pick one and I'll ship a sendable version.</p>
+  </div>
+
+  <div style="display:flex;gap:56px;align-items:flex-start;">
+
+    <!-- DIRECTION A -->
+    <div style="flex:none;width:600px;">
+      <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 16px;">
+        <span style="font-size:13px;font-weight:800;color:#1A0B2E;">A</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8B8497;">Editorial Light</span>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Desktop · 600</p>
+      <div style="width:600px;margin:0 0 36px;">
+        <dc-import name="EmailEditorialLight" hint-size="100%,1300px"></dc-import>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Mobile · 375</p>
+      <div style="width:375px;">
+        <dc-import name="EmailEditorialLight" hint-size="100%,1500px"></dc-import>
+      </div>
+    </div>
+
+    <!-- DIRECTION B -->
+    <div style="flex:none;width:600px;">
+      <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 16px;">
+        <span style="font-size:13px;font-weight:800;color:#1A0B2E;">B</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8B8497;">Gradient Premium</span>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Desktop · 600</p>
+      <div style="width:600px;margin:0 0 36px;">
+        <dc-import name="EmailGradientPremium" hint-size="100%,1200px"></dc-import>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Mobile · 375</p>
+      <div style="width:375px;">
+        <dc-import name="EmailGradientPremium" hint-size="100%,1500px"></dc-import>
+      </div>
+    </div>
+
+    <!-- DIRECTION C -->
+    <div style="flex:none;width:600px;">
+      <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 16px;">
+        <span style="font-size:13px;font-weight:800;color:#1A0B2E;">C</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8B8497;">Minimal Centered</span>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Desktop · 600</p>
+      <div style="width:600px;margin:0 0 36px;">
+        <dc-import name="EmailMinimalCentered" hint-size="100%,1150px"></dc-import>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Mobile · 375</p>
+      <div style="width:375px;">
+        <dc-import name="EmailMinimalCentered" hint-size="100%,1450px"></dc-import>
+      </div>
+    </div>
+
+    <!-- DIRECTION D -->
+    <div style="flex:none;width:600px;">
+      <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 16px;">
+        <span style="font-size:13px;font-weight:800;color:#1A0B2E;">D</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8B8497;">Dark Editorial</span>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Desktop · 600</p>
+      <div style="width:600px;margin:0 0 36px;">
+        <dc-import name="EmailDarkEditorial" hint-size="100%,1300px"></dc-import>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Mobile · 375</p>
+      <div style="width:375px;">
+        <dc-import name="EmailDarkEditorial" hint-size="100%,1500px"></dc-import>
+      </div>
+    </div>
+
+    <!-- DIRECTION E -->
+    <div style="flex:none;width:600px;">
+      <div style="display:flex;align-items:baseline;gap:10px;margin:0 0 16px;">
+        <span style="font-size:13px;font-weight:800;color:#1A0B2E;">E</span>
+        <span style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8B8497;">Event Ticket</span>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Desktop · 600</p>
+      <div style="width:600px;margin:0 0 36px;">
+        <dc-import name="EmailEventTicket" hint-size="100%,1300px"></dc-import>
+      </div>
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#A89FB5;">Mobile · 375</p>
+      <div style="width:375px;">
+        <dc-import name="EmailEventTicket" hint-size="100%,1500px"></dc-import>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
