@@ -24,6 +24,15 @@ Or open [`index.html`](index.html) locally in a browser.
 
 **To decide:** reply with the letter (A–E) you want to ship.
 
+## 🧰 Reuse these designs — beginner prompt pack
+
+Want to recreate any of these designs yourself (no coding needed)? The [`prompts/`](prompts/)
+folder has a **plain-English, copy-paste prompt for each template** (A–E) you can hand to any AI
+assistant, plus the UI/UX considerations and the *why* behind each design.
+
+- [Start here — how to use the prompts](prompts/README.md)
+- [A — Editorial Light](prompts/template-A-editorial-light.md) · [B — Gradient Premium](prompts/template-B-gradient-premium.md) · [C — Minimal Centered](prompts/template-C-minimal-centered.md) · [D — Dark Editorial](prompts/template-D-dark-editorial.md) · [E — Event Ticket](prompts/template-E-event-ticket.md)
+
 ## 📁 Structure
 
 ```
@@ -35,6 +44,7 @@ Or open [`index.html`](index.html) locally in a browser.
 │   ├── c-minimal-centered.html
 │   ├── d-dark-editorial.html
 │   └── e-event-ticket.html
+├── prompts/        # Beginner-friendly, copy-paste prompt for each design (A–E) + UI/UX notes
 ├── source/         # Original design-canvas exports (.dc.html + support.js runtime)
 └── reference/      # Brand guidelines + earlier template, for reference
 ```
